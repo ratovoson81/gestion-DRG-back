@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Patient } from './patient/patient.entity';
+import { Personne } from './personne/personne.entity';
+import { Consultation } from './consultation/consultation.entity';
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -8,7 +9,7 @@ const ormconfig: TypeOrmModuleOptions = {
   username: 'root',
   password: '',
   database: 'gestion_medicale',
-  entities: [Patient],
+  entities: [Personne, Consultation],
   synchronize: true,
 };
 

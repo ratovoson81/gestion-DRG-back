@@ -17,4 +17,7 @@ export class InputPersonne implements Partial<Personne> {
 
   @Field()
   adresse: string;
+
+  @Field()
+  sexe: boolean;
 }

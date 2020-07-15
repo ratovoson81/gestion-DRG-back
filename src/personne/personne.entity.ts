@@ -30,6 +30,10 @@ export class Personne {
   @Column()
   adresse: string;
 
+  @Field()
+  @Column()
+  sexe: boolean;
+
   @Field(type => [Consultation])
   @OneToMany(
     type => Consultation,

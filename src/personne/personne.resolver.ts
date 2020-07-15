@@ -12,6 +12,11 @@ export class PersonneResolver {
     return 'hello world';
   }
 
+  @Query(returns => [Personne])
+  async getAllPersonne() {
+    return this.personneService.getAllPersonne();
+  }
+
   @Mutation(returns => Personne)
   async createPersonne(@Args('data') newPersonneData: InputPersonne) {
     return this.personneService.createPersonne(newPersonneData);

@@ -16,4 +16,10 @@ export class PersonneService {
     Object.assign(personne, newPersonneData);
     return this.personneRepository.save(personne);
   }
+
+  async getAllPersonne(): Promise<Personne[]> {
+    return this.personneRepository.find({
+      relations: ['consultations'],
+    });
+  }
 }

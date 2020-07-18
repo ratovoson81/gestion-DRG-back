@@ -22,4 +22,14 @@ export class PersonneService {
       relations: ['consultations'],
     });
   }
+
+  async updatePersonne(personneData: InputPersonne): Promise<Personne> {
+    const personne = await this.personneRepository.findOne({
+      where: { idPersonne: personneData.idPersonne },
+      relations: ['consultations'],
+    });
+    const { idPersonne, ...rest } = personneData;
+    Object.assign(personne, rest);
+    return this.personneRepository.save(personne);
+  }
 }

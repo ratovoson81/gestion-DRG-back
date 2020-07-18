@@ -20,6 +20,10 @@ export class Personne {
 
   @Field()
   @Column()
+  sexe: boolean;
+
+  @Field()
+  @Column()
   poids: number;
 
   @Field({ nullable: true })
@@ -29,10 +33,6 @@ export class Personne {
   @Field()
   @Column()
   adresse: string;
-
-  @Field()
-  @Column()
-  sexe: boolean;
 
   @Field(type => [Consultation])
   @OneToMany(

@@ -21,4 +21,9 @@ export class PersonneResolver {
   async createPersonne(@Args('data') newPersonneData: InputPersonne) {
     return this.personneService.createPersonne(newPersonneData);
   }
+
+  @Mutation(returns => Personne)
+  async updatePersonne(@Args('data') personneData: InputPersonne) {
+    return this.personneService.updatePersonne(personneData)
+  }
 }

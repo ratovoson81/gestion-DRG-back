@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, ID } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, ID, Query } from '@nestjs/graphql';
 import { ConsultationService } from './consultation.service';
 import { Consultation } from './consultation.entity';
 import { InputConsultation } from './consultation.input';
@@ -16,5 +16,10 @@ export class ConsultationResolver {
       consultationData,
       idPersonne,
     );
+  }
+
+  @Query(returns => [Consultation])
+  async getAllConsultation() {
+    return this.consultationService.getAllConsultation();
   }
 }

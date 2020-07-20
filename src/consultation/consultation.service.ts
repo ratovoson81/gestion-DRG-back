@@ -22,4 +22,10 @@ export class ConsultationService {
     consultation.date = date;
     return this.consultationRepository.save(consultation);
   }
+
+  async getAllConsultation(): Promise<Consultation[]> {
+    return this.consultationRepository.find({
+      relations: ['personne'],
+    });
+  }
 }

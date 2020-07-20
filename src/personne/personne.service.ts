@@ -32,4 +32,10 @@ export class PersonneService {
     Object.assign(personne, rest);
     return this.personneRepository.save(personne);
   }
+
+  async getPersonneById(id: string): Promise<Personne> {
+    return await this.personneRepository.findOne({
+      where: { idPersonne: id },
+    });
+  }
 }

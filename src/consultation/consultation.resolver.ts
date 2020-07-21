@@ -22,4 +22,9 @@ export class ConsultationResolver {
   async getAllConsultation() {
     return this.consultationService.getAllConsultation();
   }
+
+  @Mutation(returns => Consultation)
+  async updateConsultation(@Args('data') updateData: InputConsultation) {
+    return this.consultationService.updateConsultation(updateData);
+  }
 }

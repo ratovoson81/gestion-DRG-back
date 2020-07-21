@@ -28,4 +28,16 @@ export class ConsultationService {
       relations: ['personne'],
     });
   }
+
+  async updateConsultation(
+    updateData: InputConsultation,
+  ): Promise<Consultation> {
+    const consultation = await this.consultationRepository.findOne({
+      where: { idConsultation: updateData.idConsultation },
+      relations: ['personne'],
+    });
+    const { idConsultation, ...rest } = updateData;
+    Object.assign(consultation, rest);
+    return this.consultationRepository.save(consultation);
+  }
 }

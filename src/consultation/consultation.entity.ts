@@ -19,7 +19,7 @@ export class Consultation {
 
   @Field()
   @Column()
-  tension: number;
+  tension: string;
 
   @Field()
   @Column()

@@ -13,7 +13,7 @@ export class InputConsultation implements Partial<Consultation> {
   diagnostic: string;
 
   @Field()
-  tension: number;
+  tension: string;
 
   @Field()
   TDRPalu: boolean;

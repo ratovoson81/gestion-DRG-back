@@ -1,6 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { ObjectType, Field, ID, GraphQLISODateTime } from '@nestjs/graphql';
 import { Personne } from 'src/personne/personne.entity';
+import { Diagnostic } from 'src/diagnostic/diagnostic.entity';
 
 @ObjectType()
 @Entity()
@@ -12,10 +20,6 @@ export class Consultation {
   @Field()
   @Column()
   temperature: number;
-
-  @Field()
-  @Column()
-  diagnostic: string;
 
   @Field()
   @Column()
@@ -39,4 +43,12 @@ export class Consultation {
     personne => personne.consultations,
   )
   personne: Personne;
+
+  @Field(type => [Diagnostic])
+  @ManyToMany(
+    type => Diagnostic,
+    diagnostic => diagnostic.consultations,
+  )
+  @JoinTable()
+  diagnostics: Diagnostic[];
 }

@@ -9,6 +9,9 @@ import ormconfig from './ormconfig';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ConsultationModule } from './consultation/consultation.module';
+import { DiagnosticResolver } from './diagnostic/diagnostic.resolver';
+import { DiagnosticService } from './diagnostic/diagnostic.service';
+import { DiagnosticModule } from './diagnostic/diagnostic.module';
 
 @Module({
   imports: [
@@ -18,8 +21,9 @@ import { ConsultationModule } from './consultation/consultation.module';
     TypeOrmModule.forRoot(ormconfig),
     PersonneModule,
     ConsultationModule,
+    DiagnosticModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DiagnosticResolver, DiagnosticService],
 })
 export class AppModule {}

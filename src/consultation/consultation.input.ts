@@ -1,5 +1,6 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
 import { Consultation } from './consultation.entity';
+import { InputDiagnostic } from 'src/diagnostic/diagnostic.input';
 
 @InputType({ description: 'new consultation data' })
 export class InputConsultation implements Partial<Consultation> {
@@ -9,8 +10,8 @@ export class InputConsultation implements Partial<Consultation> {
   @Field()
   temperature: number;
 
-  @Field()
-  diagnostic: string;
+  @Field(type => [InputDiagnostic])
+  diagnosticData: InputDiagnostic[];
 
   @Field()
   tension: string;

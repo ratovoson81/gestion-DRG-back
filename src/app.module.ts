@@ -1,16 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PersonneService } from './personne/personne.service';
-import { PersonneResolver } from './personne/personne.resolver';
 import { PersonneModule } from './personne/personne.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ormconfig from './ormconfig';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ConsultationModule } from './consultation/consultation.module';
-import { DiagnosticResolver } from './diagnostic/diagnostic.resolver';
-import { DiagnosticService } from './diagnostic/diagnostic.service';
 import { DiagnosticModule } from './diagnostic/diagnostic.module';
 
 @Module({
@@ -24,6 +20,6 @@ import { DiagnosticModule } from './diagnostic/diagnostic.module';
     DiagnosticModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DiagnosticResolver, DiagnosticService],
+  providers: [AppService],
 })
 export class AppModule {}

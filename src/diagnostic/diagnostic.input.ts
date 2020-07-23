@@ -1,11 +1,14 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
-import { Diagnostic } from './diagnostic.entity';
+import { InputConsultation } from 'src/consultation/consultation.input';
 
 @InputType({ description: 'input diagnostic' })
-export class InputDiagnostic implements Partial<Diagnostic> {
-  @Field(type => ID)
+export class InputDiagnostic {
+  @Field(type => ID, { nullable: true })
   idDiagnostic: number;
 
   @Field()
   nom: string;
+
+  @Field(type => [InputConsultation], { nullable: true })
+  consultations: InputConsultation[];
 }

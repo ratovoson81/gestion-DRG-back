@@ -4,6 +4,8 @@ import { Consultation } from './consultation.entity';
 import { Repository } from 'typeorm';
 import { PersonneService } from 'src/personne/personne.service';
 import { InputConsultation } from './consultation.input';
+import { Diagnostic } from 'src/diagnostic/diagnostic.entity';
+import { DiagnosticService } from 'src/diagnostic/diagnostic.service';
 
 @Injectable()
 export class ConsultationService {
@@ -11,6 +13,7 @@ export class ConsultationService {
     @InjectRepository(Consultation)
     private consultationRepository: Repository<Consultation>,
     private personneService: PersonneService,
+    private diagnosticService: DiagnosticService,
   ) {}
 
   async createConsultation(data: InputConsultation, idPersonne: string) {
@@ -25,7 +28,7 @@ export class ConsultationService {
 
   async getAllConsultation(): Promise<Consultation[]> {
     return this.consultationRepository.find({
-      relations: ['personne'],
+      relations: ['personne', 'diagnostics'],
     });
   }
 
@@ -34,10 +37,20 @@ export class ConsultationService {
   ): Promise<Consultation> {
     const consultation = await this.consultationRepository.findOne({
       where: { idConsultation: updateData.idConsultation },
-      relations: ['personne'],
+      relations: ['personne', 'diagnostics'],
     });
+
+    const dataDiag: Diagnostic[] = [];
+    updateData.diagnostics.map((d: Diagnostic) =>
+      this.diagnosticService
+        .getDiagnosticById(d.idDiagnostic)
+        .then(result => dataDiag.push(result)),
+    );
+
+    delete updateData.diagnostics;
     const { idConsultation, ...rest } = updateData;
     Object.assign(consultation, rest);
+    consultation.diagnostics = dataDiag;
     return this.consultationRepository.save(consultation);
   }
 }

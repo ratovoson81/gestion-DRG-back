@@ -3,7 +3,7 @@ import { Consultation } from './consultation.entity';
 import { InputDiagnostic } from 'src/diagnostic/diagnostic.input';
 
 @InputType({ description: 'new consultation data' })
-export class InputConsultation implements Partial<Consultation> {
+export class InputConsultation {
   @Field(type => ID, { nullable: true })
   idConsultation: number;
 
@@ -11,7 +11,7 @@ export class InputConsultation implements Partial<Consultation> {
   temperature: number;
 
   @Field(type => [InputDiagnostic])
-  diagnosticData: InputDiagnostic[];
+  diagnostics: InputDiagnostic[];
 
   @Field()
   tension: string;

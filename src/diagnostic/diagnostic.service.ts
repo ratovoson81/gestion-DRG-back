@@ -22,4 +22,10 @@ export class DiagnosticService {
     Object.assign(diagnostic, newData);
     return this.diagnosticRepository.save(diagnostic);
   }
+
+  async getDiagnosticById(id: number): Promise<Diagnostic> {
+    return await this.diagnosticRepository.findOne({
+      where: { idDiagnostic: id },
+    });
+  }
 }

@@ -14,6 +14,7 @@ export class PersonneService {
   async createPersonne(newPersonneData: InputPersonne): Promise<Personne> {
     const personne = new Personne();
     Object.assign(personne, newPersonneData);
+    personne.consultations = [];
     return this.personneRepository.save(personne);
   }
 

@@ -1,5 +1,4 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
-import { Consultation } from './consultation.entity';
 import { InputDiagnostic } from 'src/diagnostic/diagnostic.input';
 
 @InputType({ description: 'new consultation data' })

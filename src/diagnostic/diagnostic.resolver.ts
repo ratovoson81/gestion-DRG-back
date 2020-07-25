@@ -16,4 +16,9 @@ export class DiagnosticResolver {
   async createDiagnostic(@Args('data') newData: InputDiagnostic) {
     return this.diagnosticService.createDiagnostic(newData);
   }
+
+  @Mutation(returns => Diagnostic)
+  async updateDiagnostic(@Args('data') newData: InputDiagnostic) {
+    return this.diagnosticService.updateDiagnostic(newData);
+  }
 }

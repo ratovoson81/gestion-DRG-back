@@ -20,6 +20,7 @@ export class DiagnosticService {
   async createDiagnostic(newData: InputDiagnostic): Promise<Diagnostic> {
     const diagnostic = new Diagnostic();
     Object.assign(diagnostic, newData);
+    diagnostic.consultations = [];
     return this.diagnosticRepository.save(diagnostic);
   }
 
@@ -27,5 +28,15 @@ export class DiagnosticService {
     return await this.diagnosticRepository.findOne({
       where: { idDiagnostic: id },
     });
+  }
+
+  async updateDiagnostic(data: InputDiagnostic): Promise<Diagnostic> {
+    const diagnostic = await this.diagnosticRepository.findOne({
+      where: { idDiagnostic: data.idDiagnostic },
+      relations: ['consultations'],
+    });
+    const { idDiagnostic, ...rest } = data;
+    Object.assign(diagnostic, rest);
+    return this.diagnosticRepository.save(diagnostic);
   }
 }

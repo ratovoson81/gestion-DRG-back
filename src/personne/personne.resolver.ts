@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { PersonneService } from './personne.service';
 import { Personne } from './personne.entity';
 import { InputPersonne } from './personne.input';
@@ -24,6 +24,10 @@ export class PersonneResolver {
 
   @Mutation(returns => Personne)
   async updatePersonne(@Args('data') personneData: InputPersonne) {
-    return this.personneService.updatePersonne(personneData)
+    return this.personneService.updatePersonne(personneData);
+  }
+  @Mutation(returns => Personne)
+  async deletePersonne(@Args('id', { type: () => ID }) id: number) {
+    return this.personneService.deletePersonne(id);
   }
 }

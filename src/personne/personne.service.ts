@@ -39,4 +39,13 @@ export class PersonneService {
       where: { idPersonne: id },
     });
   }
+
+  async deletePersonne(id: number): Promise<Personne> {
+    const personne = await this.personneRepository.findOne({
+      where: { idPersonne: id },
+    });
+    await this.personneRepository.remove(personne);
+    personne.idPersonne = id;
+    return personne;
+  }
 }

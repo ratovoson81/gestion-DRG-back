@@ -41,6 +41,7 @@ export class Consultation {
   @ManyToOne(
     type => Personne,
     personne => personne.consultations,
+    { onDelete: 'CASCADE' },
   )
   personne: Personne;
 

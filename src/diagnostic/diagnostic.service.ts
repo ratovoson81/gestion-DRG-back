@@ -39,4 +39,13 @@ export class DiagnosticService {
     Object.assign(diagnostic, rest);
     return this.diagnosticRepository.save(diagnostic);
   }
+
+  async deleteDiagnostic(id: number): Promise<Diagnostic> {
+    const diagnostic = await this.diagnosticRepository.findOne({
+      where: { idDiagnostic: id },
+    });
+    await this.diagnosticRepository.remove(diagnostic);
+    diagnostic.idDiagnostic = id;
+    return diagnostic;
+  }
 }

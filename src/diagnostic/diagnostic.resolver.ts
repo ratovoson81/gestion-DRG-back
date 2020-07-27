@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { DiagnosticService } from './diagnostic.service';
 import { Diagnostic } from './diagnostic.entity';
 import { InputDiagnostic } from './diagnostic.input';
@@ -20,5 +20,10 @@ export class DiagnosticResolver {
   @Mutation(returns => Diagnostic)
   async updateDiagnostic(@Args('data') newData: InputDiagnostic) {
     return this.diagnosticService.updateDiagnostic(newData);
+  }
+
+  @Mutation(returns => Diagnostic)
+  async deleteDiagnostic(@Args('id', { type: () => ID }) id: number) {
+    return this.diagnosticService.deleteDiagnostic(id);
   }
 }

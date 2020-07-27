@@ -27,4 +27,9 @@ export class ConsultationResolver {
   async updateConsultation(@Args('data') updateData: InputConsultation) {
     return this.consultationService.updateConsultation(updateData);
   }
+
+  @Mutation(returns => Consultation)
+  async deleteConsultation(@Args('id', { type: () => ID }) id: number) {
+    return this.consultationService.deleteConsultation(id);
+  }
 }

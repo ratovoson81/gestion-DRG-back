@@ -53,4 +53,13 @@ export class ConsultationService {
     consultation.diagnostics = dataDiag;
     return this.consultationRepository.save(consultation);
   }
+
+  async deleteConsultation(id: number): Promise<Consultation> {
+    const consultation = await this.consultationRepository.findOne({
+      where: { idConsultation: id },
+    });
+    await this.consultationRepository.remove(consultation);
+    consultation.idConsultation = id;
+    return consultation;
+  }
 }

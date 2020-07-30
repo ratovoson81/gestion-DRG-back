@@ -21,10 +21,6 @@ export class Personne {
   @Column()
   sexe: boolean;
 
-  @Field()
-  @Column()
-  poids: number;
-
   @Field({ nullable: true })
   @Column()
   phone: string;

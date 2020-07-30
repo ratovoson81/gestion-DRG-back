@@ -15,9 +15,6 @@ export class InputPersonne implements Partial<Personne> {
   @Field()
   sexe: boolean;
 
-  @Field()
-  poids: number;
-
   @Field({ nullable: true })
   phone: string;
 

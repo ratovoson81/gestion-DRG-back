@@ -23,6 +23,10 @@ export class Consultation {
 
   @Field()
   @Column()
+  poids: number;
+
+  @Field()
+  @Column()
   tension: string;
 
   @Field()

@@ -20,4 +20,7 @@ export class InputConsultation {
 
   @Field()
   cout: number;
+
+  @Field()
+  poids: number;
 }

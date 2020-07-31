@@ -31,6 +31,14 @@ export class Consultation {
 
   @Field()
   @Column()
+  analyse: string;
+
+  @Field()
+  @Column()
+  traitement: string;
+
+  @Field()
+  @Column()
   TDRPalu: boolean;
 
   @Field()

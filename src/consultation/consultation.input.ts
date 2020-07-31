@@ -13,14 +13,20 @@ export class InputConsultation {
   diagnostics: InputDiagnostic[];
 
   @Field()
+  poids: number;
+
+  @Field()
   tension: string;
+
+  @Field()
+  analyse: string;
+
+  @Field()
+  traitement: string;
 
   @Field()
   TDRPalu: boolean;
 
   @Field()
   cout: number;
-
-  @Field()
-  poids: number;
 }

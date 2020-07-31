@@ -5,10 +5,12 @@ import {
   ManyToOne,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { ObjectType, Field, ID, GraphQLISODateTime } from '@nestjs/graphql';
 import { Personne } from 'src/personne/personne.entity';
 import { Diagnostic } from 'src/diagnostic/diagnostic.entity';
+import { Article } from 'src/article/article.entity';
 
 @ObjectType()
 @Entity()
@@ -41,10 +43,6 @@ export class Consultation {
   @Column()
   TDRPalu: boolean;
 
-  @Field()
-  @Column()
-  cout: number;
-
   @Field(type => GraphQLISODateTime)
   @Column()
   date: Date;
@@ -64,4 +62,11 @@ export class Consultation {
   )
   @JoinTable()
   diagnostics: Diagnostic[];
+
+  @Field(type => [Article])
+  @OneToMany(
+    type => Article,
+    article => article.consultation,
+  )
+  articles: Article[];
 }

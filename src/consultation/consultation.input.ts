@@ -1,5 +1,6 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
 import { InputDiagnostic } from 'src/diagnostic/diagnostic.input';
+import { InputArticle } from 'src/article/article.input';
 
 @InputType({ description: 'new consultation data' })
 export class InputConsultation {
@@ -27,6 +28,6 @@ export class InputConsultation {
   @Field()
   TDRPalu: boolean;
 
-  @Field()
-  cout: number;
+  @Field(type => [InputArticle])
+  articles: InputArticle[];
 }

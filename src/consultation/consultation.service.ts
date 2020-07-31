@@ -34,7 +34,7 @@ export class ConsultationService {
 
   async getAllConsultation(): Promise<Consultation[]> {
     return this.consultationRepository.find({
-      relations: ['personne', 'diagnostics'],
+      relations: ['personne', 'diagnostics', 'articles'],
     });
   }
 

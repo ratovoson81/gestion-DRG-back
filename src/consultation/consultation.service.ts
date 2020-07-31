@@ -6,6 +6,7 @@ import { PersonneService } from 'src/personne/personne.service';
 import { InputConsultation } from './consultation.input';
 import { Diagnostic } from 'src/diagnostic/diagnostic.entity';
 import { DiagnosticService } from 'src/diagnostic/diagnostic.service';
+import { ArticleService } from 'src/article/article.service';
 
 @Injectable()
 export class ConsultationService {
@@ -14,6 +15,7 @@ export class ConsultationService {
     private consultationRepository: Repository<Consultation>,
     private personneService: PersonneService,
     private diagnosticService: DiagnosticService,
+    private articleService: ArticleService,
   ) {}
 
   async createConsultation(data: InputConsultation, idPersonne: string) {
@@ -21,8 +23,12 @@ export class ConsultationService {
     const date = new Date();
     const personne = await this.personneService.getPersonneById(idPersonne);
     Object.assign(consultation, data);
+
+    const dataArticle = await this.articleService.create(data.articles);
+
     consultation.personne = personne;
     consultation.date = date;
+    consultation.articles = dataArticle;
     return this.consultationRepository.save(consultation);
   }
 

@@ -52,11 +52,16 @@ export class ConsultationService {
         .getDiagnosticById(d.idDiagnostic)
         .then(result => dataDiag.push(result)),
     );
-
     delete updateData.diagnostics;
+
+    const dataArticle = await this.articleService.update(updateData.articles);
+    delete updateData.articles;
+
     const { idConsultation, ...rest } = updateData;
     Object.assign(consultation, rest);
+
     consultation.diagnostics = dataDiag;
+    consultation.articles = dataArticle;
     return this.consultationRepository.save(consultation);
   }
 

@@ -7,6 +7,7 @@ import { InputConsultation } from './consultation.input';
 import { Diagnostic } from 'src/diagnostic/diagnostic.entity';
 import { DiagnosticService } from 'src/diagnostic/diagnostic.service';
 import { ArticleService } from 'src/article/article.service';
+import { AnalyseService } from 'src/analyse/analyse.service';
 
 @Injectable()
 export class ConsultationService {
@@ -16,6 +17,7 @@ export class ConsultationService {
     private personneService: PersonneService,
     private diagnosticService: DiagnosticService,
     private articleService: ArticleService,
+    private analyseService: AnalyseService,
   ) {}
 
   async createConsultation(data: InputConsultation, idPersonne: string) {
@@ -25,16 +27,18 @@ export class ConsultationService {
     Object.assign(consultation, data);
 
     const dataArticle = await this.articleService.create(data.articles);
+    const dataAnalyse = await this.analyseService.create(data.analyses);
 
     consultation.personne = personne;
     consultation.date = date;
     consultation.articles = dataArticle;
+    consultation.analyses = dataAnalyse;
     return this.consultationRepository.save(consultation);
   }
 
   async getAllConsultation(): Promise<Consultation[]> {
     return this.consultationRepository.find({
-      relations: ['personne', 'diagnostics', 'articles'],
+      relations: ['personne', 'diagnostics', 'articles', 'analyses'],
     });
   }
 
@@ -57,11 +61,15 @@ export class ConsultationService {
     const dataArticle = await this.articleService.update(updateData.articles);
     delete updateData.articles;
 
+    const dataAnalyse = await this.analyseService.update(updateData.analyses);
+    delete updateData.analyses;
+
     const { idConsultation, ...rest } = updateData;
     Object.assign(consultation, rest);
 
     consultation.diagnostics = dataDiag;
     consultation.articles = dataArticle;
+    consultation.analyses = dataAnalyse;
     return this.consultationRepository.save(consultation);
   }
 

@@ -18,7 +18,6 @@ export class ArticleService {
   }
 
   async update(data: InputArticle[]): Promise<Article[]> {
-    console.log(data);
     const articleData: Article[] = await Promise.all(
       data.map(
         async (a: Article): Promise<Article> => {

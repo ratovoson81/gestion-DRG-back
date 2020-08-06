@@ -1,6 +1,7 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
 import { InputDiagnostic } from 'src/diagnostic/diagnostic.input';
 import { InputArticle } from 'src/article/article.input';
+import { InputAnalyse } from 'src/analyse/analyse.input';
 
 @InputType({ description: 'new consultation data' })
 export class InputConsultation {
@@ -20,14 +21,14 @@ export class InputConsultation {
   tension: string;
 
   @Field()
-  analyse: string;
-
-  @Field()
   traitement: string;
 
-  @Field()
-  TDRPalu: boolean;
+  @Field({ nullable: true })
+  TDRPalu: string;
 
   @Field(type => [InputArticle])
   articles: InputArticle[];
+
+  @Field(type => [InputAnalyse], { nullable: true })
+  analyses: InputAnalyse[];
 }

@@ -6,6 +6,7 @@ import { Consultation } from './consultation.entity';
 import { PersonneModule } from 'src/personne/personne.module';
 import { DiagnosticModule } from 'src/diagnostic/diagnostic.module';
 import { ArticleModule } from 'src/article/article.module';
+import { AnalyseModule } from 'src/analyse/analyse.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ArticleModule } from 'src/article/article.module';
     PersonneModule,
     DiagnosticModule,
     ArticleModule,
+    AnalyseModule,
   ],
   providers: [ConsultationService, ConsultationResolver],
   exports: [ConsultationService],

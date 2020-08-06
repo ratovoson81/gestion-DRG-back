@@ -8,9 +8,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ConsultationModule } from './consultation/consultation.module';
 import { DiagnosticModule } from './diagnostic/diagnostic.module';
-import { ArticleResolver } from './article/article.resolver';
-import { ArticleService } from './article/article.service';
 import { ArticleModule } from './article/article.module';
+import { AnalyseModule } from './analyse/analyse.module';
 
 @Module({
   imports: [
@@ -22,6 +21,7 @@ import { ArticleModule } from './article/article.module';
     ConsultationModule,
     DiagnosticModule,
     ArticleModule,
+    AnalyseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

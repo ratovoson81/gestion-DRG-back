@@ -11,6 +11,7 @@ import { ObjectType, Field, ID, GraphQLISODateTime } from '@nestjs/graphql';
 import { Personne } from 'src/personne/personne.entity';
 import { Diagnostic } from 'src/diagnostic/diagnostic.entity';
 import { Article } from 'src/article/article.entity';
+import { Analyse } from 'src/analyse/analyse.entity';
 
 @ObjectType()
 @Entity()
@@ -31,17 +32,13 @@ export class Consultation {
   @Column()
   tension: string;
 
-  @Field()
-  @Column()
-  analyse: string;
-
-  @Field()
+  @Field({ nullable: true })
   @Column()
   traitement: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column()
-  TDRPalu: boolean;
+  TDRPalu: string;
 
   @Field(type => GraphQLISODateTime)
   @Column()
@@ -69,4 +66,11 @@ export class Consultation {
     article => article.consultation,
   )
   articles: Article[];
+
+  @Field(type => [Analyse], { nullable: true })
+  @OneToMany(
+    type => Analyse,
+    analyse => analyse.consultation,
+  )
+  analyses: Analyse[];
 }

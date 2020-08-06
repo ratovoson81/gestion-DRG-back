@@ -3,6 +3,7 @@ import { Personne } from './personne/personne.entity';
 import { Consultation } from './consultation/consultation.entity';
 import { Diagnostic } from './diagnostic/diagnostic.entity';
 import { Article } from './article/article.entity';
+import { Analyse } from './analyse/analyse.entity';
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -11,7 +12,7 @@ const ormconfig: TypeOrmModuleOptions = {
   username: 'root',
   password: '',
   database: 'gestion_medicale',
-  entities: [Personne, Consultation, Diagnostic, Article],
+  entities: [Personne, Consultation, Diagnostic, Article, Analyse],
   synchronize: true,
 };
 

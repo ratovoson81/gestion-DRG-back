@@ -17,14 +17,17 @@ export class InputConsultation {
   @Field()
   poids: number;
 
-  @Field()
+  @Field({ nullable: true })
   tension: string;
 
-  @Field()
+  @Field({ nullable: true })
   traitement: string;
 
   @Field({ nullable: true })
   TDRPalu: string;
+
+  @Field({ nullable: true })
+  autre: string;
 
   @Field(type => [InputArticle])
   articles: InputArticle[];

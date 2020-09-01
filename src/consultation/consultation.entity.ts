@@ -21,14 +21,14 @@ export class Consultation {
   idConsultation: number;
 
   @Field()
-  @Column()
+  @Column('double')
   temperature: number;
 
   @Field()
   @Column()
   poids: number;
 
-  @Field()
+  @Field({ nullable: true })
   @Column()
   tension: string;
 
@@ -39,6 +39,10 @@ export class Consultation {
   @Field({ nullable: true })
   @Column()
   TDRPalu: string;
+
+  @Field({ nullable: true })
+  @Column()
+  autre: string;
 
   @Field(type => GraphQLISODateTime)
   @Column()
